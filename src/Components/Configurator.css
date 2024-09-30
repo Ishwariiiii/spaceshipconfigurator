@@ -1,0 +1,109 @@
+/* Global styles */
+body {
+    background-color: #001744; /* Dark blue background */
+    color: #00ff00; /* Neon green text */
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .configurator-container {
+    border: 1px solid #00ff00;
+    padding: 20px;
+    max-width: 700px;
+   
+    margin: 50px auto;
+    border-radius: 10px;
+  }
+  
+  .configurator {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  h1 {
+    text-align: center;
+    font-size: 2rem;
+  }
+  
+  .section {
+    margin-bottom: 20px;
+  }
+  
+  .section h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .options {
+    display: flex;
+    gap: 10px;
+  }
+  
+  button {
+    background-color: transparent;
+    border: 1px solid #00ff00;
+    padding: 10px;
+    color: #00ff00;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #00ff00;
+    color: #001744;
+  }
+  
+  button.selected {
+    border: 2px solid #ff00ff;
+  }
+  
+  .color-option.snow {
+    background-color: #fff;
+    color: #001744;
+  }
+  
+  .color-option.volcano {
+    background-color: #ff5e00;
+    color: #001744;
+  }
+  
+  .color-option.sky {
+    background-color: #00bfff;
+    color: #001744;
+  }
+  
+  .package-option.basic, .package-option.sport, .package-option.lux {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    gap: 5px;
+  }
+  
+  .package-option.basic {
+    background-color: #00ff00;
+    color: #001744;
+  }
+  
+  .package-option.sport {
+    background-color: #ff5e00;
+    color: #001744;
+  }
+  
+  .package-option.lux {
+    background-color: #00bfff;
+    color: #001744;
+  }
+  
+  .price-panel {
+    border: 1px solid #00ff00;
+    padding: 15px;
+    text-align: left;
+  }
+  
+  .price-panel p {
+    margin: 5px 0;
+  }
+  
