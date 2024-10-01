@@ -1,174 +1,137 @@
-
-// import React, { useState } from 'react';
-// import './Configurator.css';
-
-// const Configurator = () => {
-//     const basePrice = 1000;
-
-//     // State to track selected options and their prices
-//     const [color, setColor] = useState({ name: 'Snow', price: 0 });
-//     const [power, setPower] = useState({ level: '150 MW', price: 200 });
-//     const [warpDrive, setWarpDrive] = useState({ enabled: false, price: 0 });
-//     const [optionPackage, setOptionPackage] = useState({ name: 'Basic', price: 0 });
-//     const [total, setTotal] = useState(basePrice + power.price);
-
-//     // Function to update selection and recalculate the total
-//     const updateTotal = (newColor, newPower, newWarpDrive, newOptionPackage) => {
-//         const newTotal = basePrice + newColor.price + newPower.price + newWarpDrive.price + newOptionPackage.price;
-//         setTotal(newTotal);
-//     };
-
-//     const handleColorSelection = (name, price) => {
-//         const newColor = { name, price };
-//         setColor(newColor);
-//         updateTotal(newColor, power, warpDrive, optionPackage);
-//     };
-
-//     const handlePowerSelection = (level, price) => {
-//         const newPower = { level, price };
-//         setPower(newPower);
-//         updateTotal(color, newPower, warpDrive, optionPackage);
-//     };
-
-//     const handleWarpDriveSelection = (enabled, price) => {
-//         const newWarpDrive = { enabled, price };
-//         setWarpDrive(newWarpDrive);
-//         updateTotal(color, power, newWarpDrive, optionPackage);
-//     };
-
-//     const handlePackageSelection = (name, price) => {
-//         const newOptionPackage = { name, price };
-//         setOptionPackage(newOptionPackage);
-//         updateTotal(color, power, warpDrive, newOptionPackage);
-//     };
-
-//     return (
-//         <div className="configurator-container">
-//             <h1>Spaceship configurator</h1>
-//             <div className="configurator">
-//                 {/* Color selection */}
-//                 <div className="section">
-//                     <h3>Select color:</h3>
-//                     <div className="options">
-//                         <button className="color-option snow" onClick={() => handleColorSelection('Snow', 0)}>Snow <span>+0€</span></button>
-//                         <button className="color-option volcano" onClick={() => handleColorSelection('Volcano', 100)}>Volcano <span>+100€</span></button>
-//                         <button className="color-option sky" onClick={() => handleColorSelection('Sky', 100)}>Sky <span>+100€</span></button>
-//                     </div>
-//                 </div>
-
-//                 {/* Power selection */}
-//                 <div className="section">
-//                     <h3>Select power:</h3>
-//                     <div className="options">
-//                         <button className="power-option" onClick={() => handlePowerSelection('100 MW', 0)}>100 MW <br /><span>+0€</span></button>
-//                         <button className="power-option selected" onClick={() => handlePowerSelection('150 MW', 200)}>150 MW <br /><span>+200€</span></button>
-//                         <button className="power-option" onClick={() => handlePowerSelection('200 MW', 500)}>200 MW <br /><span>+500€</span></button>
-//                     </div>
-//                 </div>
-
-//                 {/* Warp drive selection */}
-//                 <div className="section">
-//                     <h3>Warp drive:</h3>
-//                     <div className="options">
-//                         <button className="warp-option selected" onClick={() => handleWarpDriveSelection(false, 0)}>NO <span>+0€</span></button>
-//                         <button className="warp-option" onClick={() => handleWarpDriveSelection(true, 1000)}>YES <span>+1000€</span></button>
-//                     </div>
-//                 </div>
-
-//                 {/* Option package selection */}
-//                 <div className="section">
-//                     <h3>Select option package:</h3>
-//                     <div className="options">
-//                         <button className="package-option basic" onClick={() => handlePackageSelection('Basic', 0)}>Basic <span>+0€</span></button>
-//                         <button className="package-option sport" onClick={() => handlePackageSelection('Sport', 100)}>Sport <span>+100€</span></button>
-//                         <button className="package-option lux" onClick={() => handlePackageSelection('Lux', 500)}>Lux <span>+500€</span></button>
-//                     </div>
-//                 </div>
-
-//                 {/* Pricing panel */}
-//                 <div className="price-panel">
-//                     <p>Base price: {basePrice}€</p>
-//                     <p>Color: {color.name} +{color.price}€</p>
-//                     <p>Power: {power.level} +{power.price}€</p>
-//                     <p>Warp drive: {warpDrive.enabled ? 'YES' : 'NO'} +{warpDrive.price}€</p>
-//                     <p>Option package: {optionPackage.name} +{optionPackage.price}€</p>
-//                     <p>Total: {total}€</p>
-//                 </div>
-
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default Configurator;
-
-
-
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import { setColor, setPower, setWarpDrive, setOptionPackage } from './spaceshipSlice';
-import { setColor,setPower,setWarpDrive,setOptionPackage } from '../Redux/SpaceshipSlice';
+import { setColor, setOptionPackage, setPower, setWarpDrive } from '../Redux/SpaceshipSlice';
 import './Configurator.css';
 
 const Configurator = () => {
-    const dispatch = useDispatch();
-    
-    // Retrieve the spaceship configuration state from the Redux store
+    const dispatch = useDispatch()
     const { basePrice, color, power, warpDrive, optionPackage, total } = useSelector((state) => state.spaceship);
+
+    const [selectedColor, setSelectedColor] = useState(
+        { name: null, price: 0 })
+    const [selectedPower, setSelectedPower] = useState(
+        { level: null, price: 0 })
+    const [selectedWarpDrive, setSelectedWarpDrive] = useState(
+        { enabled: null, price: 0 })
+    const [selectedOptionPackage, setSelectedOptionPackage] = useState(
+        { name: null, price: 0 })
+
+    const handleColorSelect = (name, price) => {
+        const colorObj = { name, price }
+        dispatch(setColor(colorObj))
+        setSelectedColor(colorObj)
+    }
+
+    const handlePowerSelect = (level, price) => {
+        const powerObj = { level, price }
+        dispatch(setPower(powerObj))
+        setSelectedPower(powerObj)
+    }
+
+    const handleWarpDriveSelect = (enabled, price) => {
+        const warpDriveObj = { enabled, price }
+        dispatch(setWarpDrive(warpDriveObj))
+        setSelectedWarpDrive(warpDriveObj)
+    }
+
+    const handleOptionPackageSelect = (name, price) => {
+        const optionPackageObj = { name, price }
+        dispatch(setOptionPackage(optionPackageObj))
+        setSelectedOptionPackage(optionPackageObj)
+    }
 
     return (
         <div className="configurator-container">
-            <h1>Spaceship configurator</h1>
+            <h1 className='heading-1'>Spaceship configurator</h1>
             <div className="configurator">
-                {/* Color selection */}
                 <div className="section">
-                    <h3>Select color:</h3>
-                    <div className="options">
-                        <button className="color-option snow" onClick={() => dispatch(setColor({ name: 'Snow', price: 0 }))}>Snow <span>+0€</span></button>
-                        <button className="color-option volcano" onClick={() => dispatch(setColor({ name: 'Volcano', price: 100 }))}>Volcano <span>+100€</span></button>
-                        <button className="color-option sky" onClick={() => dispatch(setColor({ name: 'Sky', price: 100 }))}>Sky <span>+100€</span></button>
+                    <h3 className='heading-2'>Select color:</h3>
+                    <div className="all box">
+                        <div className={`container ${selectedColor.name === "snow" ? "selected" : ""}`}
+                            onClick={() => handleColorSelect("snow", 0)}>
+                            <div className="white-box"></div>
+                            <div className="price">+0€</div>
+                            <div className="title">Snow</div>
+                        </div>
+                        <div className={`container ${selectedColor.name === "Volcano" ? "selected" : ""}`}
+                            onClick={() => handleColorSelect("Volcano", 100)}>
+                            <div className="orange-box"></div>
+                            <div className="price">+100€</div>
+                            <div className="title">Volcano</div>
+                        </div>
+                        <div className={`container ${selectedColor.name === "Sky" ? "selected" : ""}`}
+                            onClick={() => handleColorSelect("Sky", 100)}>
+                            <div className="sky-box"></div>
+                            <div className="price">+100€</div>
+                            <div className="title">Sky</div>
+                        </div>
                     </div>
                 </div>
-
-                {/* Power selection */}
                 <div className="section">
-                    <h3>Select power:</h3>
+                    <h3 className='heading-3'>Select power:</h3>
                     <div className="options">
-                        <button className="power-option" onClick={() => dispatch(setPower({ level: '100 MW', price: 0 }))}>100 MW <br /><span>+0€</span></button>
-                        <button className="power-option selected" onClick={() => dispatch(setPower({ level: '150 MW', price: 200 }))}>150 MW <br /><span>+200€</span></button>
-                        <button className="power-option" onClick={() => dispatch(setPower({ level: '200 MW', price: 500 }))}>200 MW <br /><span>+500€</span></button>
+                        <button className={`power-option ${selectedPower.level === "100 MW" ? "selected" : ""}`}
+                            onClick={() => handlePowerSelect('100 MW', 0)}>100 MW <br /><span>+0€</span></button>
+                        <button className={`power-option ${selectedPower.level === "150 MW" ? "selected" : ""}`}
+                            onClick={() => handlePowerSelect('150 MW', 200)}>150 MW <br /><span>+200€</span></button>
+                        <button className={`power-option ${selectedPower.level === "200 MW" ? "selected" : ""}`}
+                            onClick={() => handlePowerSelect('200 MW', 500)}>200 MW <br /><span>+500€</span></button>
                     </div>
                 </div>
-
-                {/* Warp drive selection */}
                 <div className="section">
-                    <h3>Warp drive:</h3>
+                    <h3 className='heading-4'>Warp drive:</h3>
                     <div className="options">
-                        <button className="warp-option selected" onClick={() => dispatch(setWarpDrive({ enabled: false, price: 0 }))}>NO <span>+0€</span></button>
-                        <button className="warp-option" onClick={() => dispatch(setWarpDrive({ enabled: true, price: 1000 }))}>YES <span>+1000€</span></button>
+                        <button className={`warp-option ${selectedWarpDrive.enabled === false ? "selected" : ""}`}
+                            onClick={() => handleWarpDriveSelect(false, 0)}>NO <br /><span>+0€</span></button>
+                        <button className={`warp-option ${selectedWarpDrive.enabled === true ? "selected" : ""}`}
+                            onClick={() => handleWarpDriveSelect(true, 1000)}>YES <br /><span>+1000€</span></button>
                     </div>
                 </div>
-
-                {/* Option package selection */}
                 <div className="section">
-                    <h3>Select option package:</h3>
+                    <h3 className='heading-5'>Select option package:</h3>
                     <div className="options">
-                        <button className="package-option basic" onClick={() => dispatch(setOptionPackage({ name: 'Basic', price: 0 }))}>Basic <span>+0€</span></button>
-                        <button className="package-option sport" onClick={() => dispatch(setOptionPackage({ name: 'Sport', price: 100 }))}>Sport <span>+100€</span></button>
-                        <button className="package-option lux" onClick={() => dispatch(setOptionPackage({ name: 'Lux', price: 500 }))}>Lux <span>+500€</span></button>
+                        <button className={`package-option ${selectedOptionPackage.name === "basic" ? "selected" : ""}`}
+                            onClick={() => handleOptionPackageSelect('basic', 0)}>
+                            <span>Basic</span><br />
+                            <div className='lines'>
+                                <span>Air conditioning</span><br />
+                                <span>Cloth seats</span><br />
+                                <span>Fm radio</span><br />
+                            </div>
+                        </button>
+                        <button className={`package-option ${selectedOptionPackage.name === "Sport" ? "selected" : ""}`}
+                            onClick={() => handleOptionPackageSelect('Sport', 100)}>
+                            <span>Sport</span><br />
+                            <span>+100€</span><br />
+                            <div className='lines'>
+                                <span>Air conditioning</span><br />
+                                <span>Cloth seats</span><br />
+                                <span>Fm radio</span><br />
+                                <span>Personal tech support</span><br />
+                            </div>
+                        </button>
+                        <button className={`package-option ${selectedOptionPackage.name === "lux" ? "selected" : ""}`}
+                            onClick={() => handleOptionPackageSelect('lux', 500)}>
+                            <span>Lux</span><br />
+                            <span>+500€</span><br />
+                            <div className='lines'>
+                                <span>Air conditioning</span><br />
+                                <span>Luxury seats</span><br />
+                                <span>Fm radio</span><br />
+                                <span>Chrome wheels</span><br />
+                                <span>Window tint</span>
+                            </div>
+                        </button>
                     </div>
                 </div>
-
-                {/* Pricing panel */}
                 <div className="price-panel">
                     <p>Base price: {basePrice}€</p>
-                    <p>Color: {color.name} +{color.price}€</p>
-                    <p>Power: {power.level} +{power.price}€</p>
-                    <p>Warp drive: {warpDrive.enabled ? 'YES' : 'NO'} +{warpDrive.price}€</p>
-                    <p>Option package: {optionPackage.name} +{optionPackage.price}€</p>
-                    <p>Total: {total}€</p>
+                    <p>Color: {selectedColor.price}€</p>
+                    <p>Power: {selectedPower.price}€</p>
+                    <p>Warp drive: {selectedWarpDrive.price}€</p>
+                    <p>Option package: {selectedOptionPackage.price}€</p>
+                    <p className='total'>Total: {total}€</p>
                 </div>
-
             </div>
         </div>
     );

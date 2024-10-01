@@ -1,109 +1,294 @@
-/* Global styles */
 body {
-    background-color: #001744; /* Dark blue background */
-    color: #00ff00; /* Neon green text */
-    font-family: 'Courier New', Courier, monospace;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .configurator-container {
-    border: 1px solid #00ff00;
-    padding: 20px;
-    max-width: 700px;
-   
-    margin: 50px auto;
-    border-radius: 10px;
-  }
-  
-  .configurator {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  h1 {
-    text-align: center;
-    font-size: 2rem;
-  }
-  
-  .section {
-    margin-bottom: 20px;
-  }
-  
-  .section h3 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-  }
-  
-  .options {
-    display: flex;
-    gap: 10px;
-  }
-  
-  button {
-    background-color: transparent;
-    border: 1px solid #00ff00;
-    padding: 10px;
-    color: #00ff00;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: #00ff00;
-    color: #001744;
-  }
-  
-  button.selected {
-    border: 2px solid #ff00ff;
-  }
-  
-  .color-option.snow {
-    background-color: #fff;
-    color: #001744;
-  }
-  
-  .color-option.volcano {
-    background-color: #ff5e00;
-    color: #001744;
-  }
-  
-  .color-option.sky {
-    background-color: #00bfff;
-    color: #001744;
-  }
-  
-  .package-option.basic, .package-option.sport, .package-option.lux {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 15px;
-    gap: 5px;
-  }
-  
-  .package-option.basic {
-    background-color: #00ff00;
-    color: #001744;
-  }
-  
-  .package-option.sport {
-    background-color: #ff5e00;
-    color: #001744;
-  }
-  
-  .package-option.lux {
-    background-color: #00bfff;
-    color: #001744;
-  }
-  
-  .price-panel {
-    border: 1px solid #00ff00;
-    padding: 15px;
-    text-align: left;
-  }
-  
-  .price-panel p {
-    margin: 5px 0;
-  }
-  
+  background-color: #001744;
+  color: #00ff00;
+  font-family: 'Courier New', Courier, monospace;
+  margin: 0;
+  padding: 0;
+}
+
+.configurator-container {
+  border: 1px solid #00ff00;
+  padding: 20px;
+  max-width: 700px;
+
+  margin: 50px auto;
+  border-radius: 10px;
+}
+
+.configurator {
+  display: flex;
+  flex-direction: column;
+}
+
+.heading-1 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.heading-1:hover {
+  text-decoration: underline;
+  text-decoration-color: skyblue;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+
+.heading-2 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+
+.heading-2:hover {
+  text-decoration: underline;
+  text-decoration-color: darkturquoise;
+}
+
+.options {
+  display: flex;
+  gap: 10px;
+  height: 70px;
+}
+
+.color-option.snow {
+  color: #001744;
+}
+
+.color-option.volcano {
+  background-color: #ff5e00;
+  color: #001744;
+}
+
+.color-option.sky {
+  background-color: #00bfff;
+  color: #001744;
+}
+
+/* .package-option.basic,
+.package-option.sport,
+.package-option.lux {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  gap: 5px;
+} */
+.package-option {
+  height: 179px;
+  margin-bottom: 12px;
+  width: 165px;
+  border: 1px solid green;
+  border-radius: 8px;
+}
+
+.package-option:hover {
+  border: 2px solid rgb(73, 31, 223);
+}
+
+.lines {
+  /* background-color: rgb(24, 94, 24);
+  margin: 0px;
+  padding: 0;
+  color: lightgreen;
+  font-weight: 300;
+  height: 127px;
+  margin-top: 30px;
+  border-radius: 8px;
+  margin-left: 0;
+  width: 157px; */
+
+  background-color: rgb(24, 94, 24);
+  margin: 0px;
+  padding: 0;
+  color: lightgreen;
+  font-weight: 300;
+  height: 127px;
+  margin-top: 19px;
+  border-radius: 8px;
+  margin-left: -3px;
+  width: 157px;
+}
+
+.package-option.basic {
+  background-color: #00ff00;
+  color: #001744;
+}
+
+.package-option.sport {
+  background-color: #ff5e00;
+  color: #001744;
+}
+
+.package-option.lux {
+  background-color: #00bfff;
+  color: #001744;
+}
+
+.price-panel {
+  border: 1px solid #00ff00;
+  padding: 15px;
+  text-align: left;
+  width: 265px;
+  margin-top: 130px;
+}
+.price-panel:hover{
+  border: 2px solid rgb(73, 31, 223);
+}
+
+.price-panel p {
+  margin: 5px 0;
+}
+
+
+.all {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  align-items: center;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 8px;
+  width: 105px;
+  border: 1px solid green;
+  height: 90px;
+
+}
+
+.container:hover {
+  border: 2px solid rgb(73, 31, 223);
+  border-radius: none;
+}
+
+.text1-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.text2-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.text3-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.white-box {
+  width: 50px;
+  height: 35px;
+  background-color: #ddd;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+.orange-box {
+  width: 50px;
+  height: 35px;
+  background-color: orange;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+.sky-box {
+  width: 50px;
+  height: 35px;
+  background-color: #00bfff;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+/* .title,
+.price {
+  font-size: 14px;
+} */
+
+.power-option {
+  background-color: transparent;
+  color: #00ff00;
+  border: 1px solid green;
+  width: 19%;
+  border-radius: 8px;
+  height: 70px;
+}
+
+.power-option:hover {
+  border-radius: none;
+  border: 2px solid rgb(73, 31, 223);
+}
+
+.warp-option {
+  background-color: transparent;
+  color: #00ff00;
+  border: 1px solid green;
+  width: 19%;
+  border-radius: 8px;
+  height: 70px;
+}
+
+.warp-option:hover {
+  border-radius: none;
+  border: 2px solid rgb(73, 31, 223);
+}
+
+.heading-3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+
+.heading-3:hover {
+  text-decoration: underline;
+  text-decoration-color: darkturquoise;
+}
+
+.heading-4 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+
+.heading-4:hover {
+  text-decoration: underline;
+  text-decoration-color: darkturquoise;
+}
+
+.heading-5 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+
+.heading-5:hover {
+  text-decoration: underline;
+  text-decoration-color: darkturquoise;
+}
+
+.package-option {
+  background-color: transparent;
+  color: #00ff00;
+}
+.total{
+  font-weight: 900;
+  color: #1a1b1c;
+  background-color: rgb(109, 131, 65);
+  font-size: 18px;
+}
+/* ///////////////////////////// */
+.selected {
+  border: 2px solid #4CAF50;
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+}

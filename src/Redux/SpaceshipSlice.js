@@ -1,40 +1,48 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-// Initial state for the spaceship configuration
 const initialState = {
     basePrice: 1000,
-    color: { name: 'Snow', price: 0 },
-    power: { level: '150 MW', price: 200 },
+    color: { name: "", price: 0 },
+    power: { level: '100 MW', price: 0 },
     warpDrive: { enabled: false, price: 0 },
     optionPackage: { name: 'Basic', price: 0 },
-    total: 1200, // basePrice + default power price
-};
+    total: 0,
+}
 
 const spaceshipSlice = createSlice({
     name: 'spaceship',
     initialState,
     reducers: {
         setColor: (state, action) => {
-            state.color = action.payload;
-            state.total = state.basePrice + state.color.price + state.power.price + state.warpDrive.price + state.optionPackage.price;
+            return {
+                ...state,
+                color: action.payload,
+                total: state.basePrice + action.payload.price + state.power.price + state.warpDrive.price + state.optionPackage.price
+            }
         },
         setPower: (state, action) => {
-            state.power = action.payload;
-            state.total = state.basePrice + state.color.price + state.power.price + state.warpDrive.price + state.optionPackage.price;
+            return {
+                ...state,
+                power: action.payload,
+                total: state.basePrice + state.color.price + action.payload.price + state.warpDrive.price + state.optionPackage.price
+            }
         },
         setWarpDrive: (state, action) => {
-            state.warpDrive = action.payload;
-            state.total = state.basePrice + state.color.price + state.power.price + state.warpDrive.price + state.optionPackage.price;
+            return {
+                ...state,
+                warpDrive: action.payload,
+                total: state.basePrice + state.color.price + state.power.price + action.payload.price + state.optionPackage.price
+            }
         },
         setOptionPackage: (state, action) => {
-            state.optionPackage = action.payload;
-            state.total = state.basePrice + state.color.price + state.power.price + state.warpDrive.price + state.optionPackage.price;
+            return {
+                ...state,
+                optionPackage: action.payload,
+                total: state.basePrice + state.color.price + state.power.price + state.warpDrive.price + action.payload.price
+            }
         }
     },
-});
+})
 
-// Export actions
-export const { setColor, setPower, setWarpDrive, setOptionPackage } = spaceshipSlice.actions;
-
-// Export the reducer to be included in the store
-export default spaceshipSlice.reducer;
+export const { setColor, setPower, setWarpDrive, setOptionPackage } = spaceshipSlice.actions
+export default spaceshipSlice.reducer
